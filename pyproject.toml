@@ -1,9 +1,9 @@
 [project]
-name = "openghg_defs"
+name = "openghg_calscales"
 version = "0.0.1"
 description = "OpenGHG gas calibration scale conversion tool"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = {text = "MIT License"}
 
 [project.urls]
@@ -18,6 +18,5 @@ build-backend = "setuptools.build_meta"
 where = ["."]
 
 [tool.setuptools.package-data]
-"openghg_defs" = ["*"]
-"openghg_defs.data" = ["*"]
-"openghg_defs.data.domain" = ["*"]
+"openghg_calscales" = ["*"]
+"openghg_calscales.data" = ["*"]

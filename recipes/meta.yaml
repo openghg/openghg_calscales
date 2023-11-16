@@ -16,6 +16,12 @@ build:
 requirements:
   host:
     - python
+  run:
+    - pandas
+    - numpy
+    - networkx
+    - sympy
+    - xarray
 
 test:
   imports:
