@@ -1,6 +1,5 @@
 pandas
-xarray
-pandas
 numpy
 networkx
+xarray
 sympy
