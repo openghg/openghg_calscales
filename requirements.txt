@@ -1,0 +1,6 @@
+pandas
+xarray
+pandas
+numpy
+networkx
+pathlib

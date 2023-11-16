@@ -1,0 +1,30 @@
+{% set data = load_file_data('../pyproject.toml', from_recipe_dir=True) %}
+{% set project = data['project'] %}
+
+package:
+  name: "{{ project.get('name') }}"
+  version: "{{ project.get('version') }}"
+
+source:
+  git_url: https://github.com/openghg/openghg_calscales.git
+  git_depth: 1
+
+build:
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+
+test:
+  imports:
+    - openghg_calscales
+
+about:
+  home: "{{ data.get('project').get('urls').get('Homepage') }}"
+  license: MIT
+  license_family: MIT
+  summary: "{{ data.get('project').get('description') }}"
+  doc_url: "{{ project.get('description') }}"
+  dev_url: "{{ data.get('project').get('urls').get('Homepage') }}"
