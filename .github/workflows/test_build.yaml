@@ -14,11 +14,12 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -36,7 +37,7 @@ jobs:
     needs: ["test"]
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
@@ -63,7 +64,7 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: mamba-org/setup-micromamba@db1df3ba9e07ea86f759e98b575c002747e9e757
         with:
           init-shell: bash
