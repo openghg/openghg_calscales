@@ -1,6 +1,6 @@
 [project]
 name = "openghg_calscales"
-version = "0.0.1"
+version = "0.1.0"
 description = "OpenGHG gas calibration scale conversion tool"
 readme = "README.md"
 requires-python = ">=3.9"
