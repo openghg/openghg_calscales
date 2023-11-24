@@ -16,7 +16,6 @@ def _decimal_date(t):
     Returns:
         float: Decimalised date
     """
-
     # Check if t is a DatetimeIndex
     if not isinstance(t, pd.DatetimeIndex):
         try:
@@ -158,9 +157,8 @@ def convert(c, species, scale_original, scale_new):
     Returns:
 
     """
-
     # If no conversion required, return original dataset
-    if scale_new == None:
+    if scale_new is None:
         return c
 
     # If scales are the same, return original dataset

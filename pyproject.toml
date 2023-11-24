@@ -20,3 +20,6 @@ where = ["."]
 [tool.setuptools.package-data]
 "openghg_calscales" = ["*"]
 "openghg_calscales.data" = ["*"]
+
+[tool.black]
+line-length = 110
