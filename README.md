@@ -20,7 +20,9 @@ Please feel free to propose new scale conversions or bug fixes by submitting a p
 
 You can clone using ```git``` using:
 
-```git clone ...```
+```console
+git clone https://github.com/openghg/openghg_calscales.git
+```
 
 Conda and pip installation coming soon.
 
