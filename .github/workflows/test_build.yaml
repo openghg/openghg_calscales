@@ -1,4 +1,4 @@
-name: Run tests
+name: Run tests, publish Python distribution to PyPI and TestPyPI
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+          cache: "pip"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -28,55 +28,117 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
-  release_pypi:
-    name: Build and publish Python distributions 📦 to PyPI and TestPyPI
+  # Code below modified from
+  # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+  build:
+    name: Build distribution 📦
     runs-on: ubuntu-latest
-    environment: openghg_calscales_release 
-    permissions:
-      id-token: write
-    needs: ["test"]
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+    needs:
+      - test
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.10
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
           cache: "pip"
       - name: Install pypa/build
-        run: |
-          pip install --upgrade build
+        run: >-
+          python3 -m
+          pip install
+          build
+          --user
       - name: Build a binary wheel and a source tarball
-        run: |
-          python -m build --sdist --wheel --outdir dist/
-      - name: Publish distribution 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@b7f401de30cb6434a1e19f805ff006643653240e
+        run: python3 -m build
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+  # If we've pushed to main we'll to a test release to TestPyPI
+  publish-to-testpypi:
+    name: Publish Python 🐍 distribution 📦 to TestPyPI
+    needs:
+      - build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/openghg_calscales
+    permissions:
+      id-token: write
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
-      - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@b7f401de30cb6434a1e19f805ff006643653240e
-  release_conda:
-    name: Build and publish conda package
+
+  publish-to-pypi:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
+    needs:
+      - build
     runs-on: ubuntu-latest
-    needs: ["test"]
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-    defaults:
-      run:
-        shell: bash -el {0}
+    environment:
+      name: pypi
+      url: https://pypi.org/p/openghg_calscales
+    permissions:
+      id-token: write
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: mamba-org/setup-micromamba@db1df3ba9e07ea86f759e98b575c002747e9e757
+      - name: Download all the dists
+        uses: actions/download-artifact@v3
         with:
-          init-shell: bash
-      - name: Build and push the conda package
-        run: |
-          micromamba create -n openghg_build anaconda-client boa -c conda-forge
-          micromamba activate openghg_build
-          conda config --append channels openghg
-          mkdir ${{ github.workspace }}/build
-          conda mambabuild --croot ${{ github.workspace }}/build recipes -c conda-forge
-          BUILD_DIR=${GITHUB_WORKSPACE}/build
-          BUILD=$(find "$BUILD_DIR" -name '*.tar.bz2')
-          anaconda --token "$ANACONDA_TOKEN" upload --user openghg --label main "$BUILD"
+          name: python-package-distributions
+          path: dist/
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    name: >-
+      Sign the Python 🐍 distribution 📦 with Sigstore
+      and upload them to GitHub Release
+    needs:
+      - publish-to-pypi
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # IMPORTANT: mandatory for making GitHub Releases
+      id-token: write # IMPORTANT: mandatory for sigstore
+
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Sign the dists with Sigstore
+        uses: sigstore/gh-action-sigstore-python@v2.1.0
+        with:
+          inputs: >-
+            ./dist/*.tar.gz
+            ./dist/*.whl
+      - name: Create GitHub Release
         env:
-          ANACONDA_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create
+          '${{ github.ref_name }}'
+          --repo '${{ github.repository }}'
+          --notes ""
+      - name: Upload artifact signatures to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        # Upload to GitHub Release using the `gh` CLI.
+        # `dist/` contains the built packages, and the
+        # sigstore-produced signatures and certificates.
+        run: >-
+          gh release upload
+          '${{ github.ref_name }}' dist/**
+          --repo '${{ github.repository }}'
