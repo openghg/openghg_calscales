@@ -175,7 +175,7 @@ def convert(c, species, scale_original, scale_new):
 
     # Check that c is not all NaNs
     if np.isnan(c).all():
-        raise ValueError("c is all NaNs.")
+        return c
 
     # Construct graph
     G = _scale_graph(species.lower())
