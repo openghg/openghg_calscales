@@ -215,7 +215,13 @@ def convert(c, species, scale_original, scale_new):
     except:
         raise ValueError(f"Conversion function {fx*ft} is not valid.")
 
+    # Calculate decimal date
+    if isinstance(c, pd.Series):
+        dec_date = _decimal_date(c.index)
+    elif isinstance(c, xr.DataArray):
+        dec_date = _decimal_date(c.time.to_index())
+
     c_out = c.copy()
-    c_out[:] = fn(c.values, _decimal_date(c.index))
+    c_out[:] = fn(c.values, dec_date)
 
     return c_out
