@@ -3,6 +3,8 @@ name: Run tests, publish Python distribution to PyPI and TestPyPI
 on:
   push:
     branches: ["main", "devel"]
+    tags:
+      - "*"
   pull_request:
     branches: ["main", "devel"]
 
