@@ -18,13 +18,38 @@ Please feel free to propose new scale conversions or bug fixes by submitting a p
 
 ## Installation
 
-You can clone using ```git``` using:
+### pip
+
+You can install `openghg_calcscales` using `pip` 
+
+```console
+pip install openghg_calscales
+```
+
+### conda
+
+Or with `conda` by doing
+
+```console
+conda install -c conda-forge -c openghg openghg_calscales
+```
+
+## Developer
+
+If you want to make modifications to the package you can use an editable install with `pip`  
+
+
+First, clone the repository using `git`
 
 ```console
 git clone https://github.com/openghg/openghg_calscales.git
 ```
 
-Conda and pip installation coming soon.
+And then install the package using `pip`
+
+```console
+pip install -e openghg_calscales/
+```
 
 ## Usage
 
@@ -37,3 +62,38 @@ ch4_tu1987 = convert(ch4_csiro94, "CH4", "CSIRO-94", "TU-1987")
 ```
 
 Add your own functions to ```data/convert_functions.csv```, and submit them as a pull request to share with others.
+
+
+## Development
+
+For the recommended development process please see the [OpenGHG documentation](https://docs.openghg.org/development/python_devel.html)
+
+### Release
+
+The package is released using GitHub actions and pushed to conda and PyPI.
+
+#### 1. Update the CHANGELOG
+
+- Update the changelog to add the header for the new version and add the date. 
+- Update the Unreleased header to match the version you're releasing and `...HEAD`.
+
+#### 2. Update `pyproject.toml`
+
+For a new release the package version must be updated in the `pyproject.toml` file. Try and follow the [Semantic Versioning](https://semver.org/) method.
+
+#### 3. Tag the commit
+
+Now tag the commit. First we create the tag and add a message (remember to insert correct version numbers here).
+
+```console
+git tag -a x.x.x -m "openghg_calscales release vx.x.x"
+```
+
+```console
+git push origin x.x.x
+```
+
+#### 4. Check GitHub Actions runners
+
+Check the GitHub Actions [runners](https://github.com/openghg/openghg_calscales/actions) to ensure the tests have
+all passed and the build for conda and PyPI has run successfully.
