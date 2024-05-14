@@ -89,6 +89,8 @@ Now tag the commit. First we create the tag and add a message (remember to inser
 git tag -a x.x.x -m "openghg_calscales release vx.x.x"
 ```
 
+Next push the tag. This will trigger the automated release by GitHub Actions.
+
 ```console
 git push origin x.x.x
 ```
