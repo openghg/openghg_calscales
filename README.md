@@ -55,7 +55,7 @@ pip install -e openghg_calscales/
 
 For example, to convert a Pandas Series or xarray DataArray from the CSIRO-94 to TU-87 scale for CH4:
 
-```
+```python
 from openghg_calscales import convert
 
 ch4_tu1987 = convert(ch4_csiro94, "CH4", "CSIRO-94", "TU-1987")
