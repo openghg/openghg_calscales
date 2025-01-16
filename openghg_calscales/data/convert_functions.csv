@@ -4,7 +4,7 @@
 # Separate synonyms for scale using a pipe character |. The default name should appear first. Names are not case sensitive,,,,,,,,
 species,scale_x,scale_y,y=f(x),y=f(t),t_start,t_end,y=f(t)_else,Reference
 ch4,CSIRO-94|CSIRO-1994|CSIRO94,TU-87|TU-1987|tokohu-87|tokohu-1987|TU87,1.0119*x,,,,,Cunnold et al. (2002). doi:10.1029/2001JD001226
-ch4,TU-87|TU-1987|tokohu-87|tokohu-1987|TU87,WMO-X2004A|NOAA-X2004A,1.002*x,,,,,Dickon Young (pers. Comm. 17/6/20 based on NOAA/AGAGE intercomparison)
+ch4,TU-87|TU-1987|tokohu-87|tokohu-1987|TU87,WMO-CH4-X2004A|WMO-X2004A|NOAA-X2004A,1.002*x,,,,,Dickon Young (pers. Comm. 17/6/20 based on NOAA/AGAGE intercomparison)
 cfc11,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,1.0082*x,,,,,Prinn et al. (2000). doi:10.1029/2000JD900141
 cfc12,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,1.0053*x,,,,,Prinn et al. (2000). doi:10.1029/2000JD900141
 cfc113,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,1.0038*x,,,,,Prinn et al. (2000). doi:10.1029/2000JD900141
@@ -17,16 +17,16 @@ ch3ccl3,SIO-98|SIO-1998|SIO98,SIO-05|SIO-2005|SIO05,0.9957*x,,,,,Chris Harth (pe
 ccl4,SIO-98|SIO-1998|SIO98,SIO-05|SIO-2005|SIO05,1*x,,,,,Chris Harth (pers. comm. To Martin Vollmer 7/5/21)
 n2o,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,,-1.0058/(2.0742e-5*t**4 - 0.164988416365503*t**3 + 492.139076353223*t**2 - 652439.175571644*t + 324357376.070416),1984.3333,1990.2465,1.0058,Ray Wang (pers. Comm.)
 n2o,SIO-98|SIO-1998|SIO98,SIO-16|SIO-2016|SIO16,1*x,,,,,Paul Krummel (pers. Comm. 
-n2o,WMO-X2006A|NOAA-X2006A,SIO-16|SIO-2016|SIO16,x+0.44,,,,,Joe Pitt (pers. Comm. 4/4/24 based on MHD Empa/SIO tertiary tank intercomparison)
-co,WMO-X2014A,CSIRO-94|CSIRO-1994|CSIRO94,(x+3.17)/0.9898,,,,,Dickon Young (pers. Comm. 17/6/20 based on NOAA/AGAGE intercomparison)
+n2o,WMO-N2O-X2006A|WMO-X2006A|NOAA-X2006A,SIO-16|SIO-2016|SIO16,x+0.44,,,,,Joe Pitt (pers. Comm. 4/4/24 based on MHD Empa/SIO tertiary tank intercomparison)
+co,WMO-CO-X2014A|WMO-X2014A,CSIRO-94|CSIRO-1994|CSIRO94,(x+3.17)/0.9898,,,,,Dickon Young (pers. Comm. 17/6/20 based on NOAA/AGAGE intercomparison)
 chcl3,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,1.0032*x,,,,,Prinn et al. (2000). doi:10.1029/2000JD900141
 hcfc22,SIO-93|SIO-1993|SIO93,SIO-98|SIO-1998|SIO98,1.0053*x,,,,,Prinn et al. (2000). doi:10.1029/2000JD900141
 sf6,SIO-98|SIO-1998|SIO98,SIO-05|SIO-2005|SIO05,0.9994*x,,,,,Chris Harth (pers. comm. To Martin Vollmer 7/5/21)
-sf6,WMO- SF6-X2014|NOAA-2014|NOAA-14,SIO-05|SIO-2005|SIO05,x/1.002,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
-sf6,WMO-SF6-X2006|NOAA-2006|NOAA-06,WMO- SF6-X2014|NOAA-2014|NOAA-14,2.6821e-3*x**2+9.7748e-1*x+3.5831e-2,,,,,NOAA ESRL (2014) https://gml.noaa.gov/ccl/sf6_scale.html as quoted in supplement of https://doi.org/10.5194/egusphere-2024-811
+sf6,WMO-SF6-X2014|WMO-X2014|NOAA-2014|NOAA-14,SIO-05|SIO-2005|SIO05,x/1.002,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
+sf6,WMO-SF6-X2006|WMO-X2006|NOAA-2006|NOAA-06,WMO-SF6-X2014|WMO-X2014|NOAA-2014|NOAA-14,2.6821e-3*x**2+9.7748e-1*x+3.5831e-2,,,,,NOAA ESRL (2014) https://gml.noaa.gov/ccl/sf6_scale.html as quoted in supplement of https://doi.org/10.5194/egusphere-2024-811
 sf6,NIES-2008|NIES-08,SIO-05|SIO-2005|SIO05,x/1.013,,,,,Saito et al. (2021) pers comm. Quoted in supplement of https://doi.org/10.5194/egusphere-2024-811
 sf6,SIO-05|SIO-2005|SIO05,METAS-2017|METAS-17,1.002*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
-sf6,METAS-2017|METAS-17,WMO- SF6-X2014|NOAA-2014,1.000*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
+sf6,METAS-2017|METAS-17,WMO-SF6-X2014|WMO-X2014|NOAA-2014|NOAA-14,1.000*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
 hfc-125,SIO-14|SIO-2014|SIO14,METAS-2017|METAS-17,0.929*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
 hfc-125,SIO-14|SIO-2014|SIO14,METAS-2015|METAS-15,0.963*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
 hfc-125,SIO-14|SIO-2014|SIO14,NOAA-2008|NOAA-08,0.946*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
