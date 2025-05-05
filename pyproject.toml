@@ -7,11 +7,11 @@ requires-python = ">=3.9"
 license = {text = "MIT License"}
 
 dependencies = [
-"pandas"
-"numpy"
-"networkx"
-"xarray"
-"sympy"]
+"pandas",
+"numpy",
+"networkx",
+"xarray",
+"sympy",]
 
 [project.urls]
 "Homepage" = "https://github.com/openghg/openghg_calscales"
