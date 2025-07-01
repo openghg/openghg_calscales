@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added dependencies in pyproject.toml. [#PR 14](https://github.com/openghg/openghg_calscales/pull/14)
+- Species synonyms for HFCs, HCFCs, PFCs
+- NIES/SIO conversion factors for HFC-23 and HFC-125
 
 ## [0.1.1] - 2024-05-13
 
