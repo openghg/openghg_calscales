@@ -33,4 +33,4 @@ hfc125,SIO-14|SIO-2014|SIO14,NOAA-2008|NOAA-08,0.946*x,,,,,Guillevic et al. (201
 hfo1234yf,Empa-2013|Empa-13,METAS-2017|METAS-17,0.910*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
 hfo1234yf,Empa-2013|Empa-13,METAS-2015|METAS-15,0.971*x,,,,,Guillevic et al. (2018) https://doi.org/10.5194/amt-11-3351-2018
 hfc23,SIO-07|SIO07|SIO-2007,NIES-08|NIES-2008|NIES08,0.986*x,,,,,AGAGE/NIES intercomparison reported by Takuya Saito (pers. comm.)
-hfc125,SIO-14|SIO14|SIO-2014,NIES-08|NIES-2008|NIES08,0.980*x,,,,,AGAGE/NIES intercomparison reported by Takuya Saito (pers. comm.)
+hfc125,SIO-14|SIO14|SIO-2014,NIES-23|NIES-2023|NIES23,0.980*x,,,,,AGAGE/NIES intercomparison reported by Takuya Saito (pers. comm.)
